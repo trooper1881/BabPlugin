@@ -1,0 +1,124 @@
+ID 	Name 	Effect 	Strength 	Non-potion/Command causes 	Potion 	Particle Color 	Notes
+1 	Speed 	
+
+    Expands FOV
+    Increases walking speed by 20%
+
+	Speed increases by 20% with each additional level 	
+
+    Sprinting and Creative|flying cause similar effects but not the status effect
+    Beacon
+
+	Potion of Swiftness 	Sky blue 	At exceedingly high levels (~level +100), the player walks faster than chunks can load.
+2 	Slowness 	
+
+    Contracts FOV
+    Decreases walking speed by 15%
+
+	Speed decreases by 15% with each additional level 	Charging a bow, sneaking, eating, drinking water, potions, or milk, and blocking cause similar effects but not the status effect 	Potion of Slowness 	Gray-blue 	At levels 7 or higher, the player will be unable to move unless they jump while moving.
+3 	Haste 	Blocks break faster by 20% (arm swings faster) 	Digging speed increases by 20% with each additional level 	Beacon 	Referenced by "Potion of Haste" by game, but potion not currently present unless using custom potion features 	Yellow 	At levels 3 or higher, when the player mines something, the hands seem to not move.
+4 	Mining Fatigue 	Blocks break slower by 20% (arm swings slower) 	Digging speed decreases by 20% with each additional level 	None 	Referenced by "Potion of Dullness" by game, but potion not currently present unless using custom potion features 	Dark khaki 	The effect does not affect block breaking in Creative mode. Levels 5 and up make the player unable to break any block.
+5 	Strength 	Increases damage dealt with melee attacks by 130%. 	Increase in damage doubles with each additional level 	Beacon 	Potion of Strength 	Dark red 	 
+6 	Instant Health 	Heals 4 hit points to players. Undead mobs are dealt 6 hit points of damage. 	Doubles the amount healed with each additional level 	None 	Potion of Healing 	Red 	Undead mobs are harmed instead. If the effect is forced to last longer than 1 tick, it will heal entities every tick.
+7 	Instant Damage 	Deals 6 hit points of damage to players. Undead mobs are healed by 6 hit points of damage. 	Doubles the amount of damage with each additional level 	None 	Potion of Harming 	Maroon 	Undead mobs are healed instead. Death is reported as "<player> was killed by magic". If the effect is forced to last longer than 1 tick, it will damage entities every tick.
+8 	Jump Boost 	
+
+    Allows the player to jump higher by approximately 1/2 block.
+    Reduces fall damage by 1 hit point.
+
+	Increases jump height by about [level]/8+.46 per level. (Jump height is ([level]+4.2)^2/16, ignoring drag). Reduces fall damage by 1 hit point each level. 	Beacon 	Referenced by "Potion of Leaping" by game, but potion not currently present unless using custom potion features 	Lavender 	If the level is 33, jumping will cause death upon landing.
+
+If the level is 128, the player will be unable to jump at all. If the level is 255, fall damage is disabled.
+9 	Nausea 	Wobbles and warps the screen 	No effect 	
+
+    Standing near a Nether portal causes a similar effect but not the status effect
+    Pufferfish
+
+	Referenced by "Potion of Nausea" by game, but potion not currently present unless using custom potion features 	Purple 	When the Nausea effect is canceled, the Nether portal animation would flash onto the screen.
+10 	Regeneration 	Regenerate 1 hit point over time every 50 ticks/2.5 seconds 	Delay between regeneration is reduced by half (rounding down) with each additional level 	
+
+    Golden Apple
+    Golden Apple|Enchanted golden apple
+    Beacon
+
+	Potion of Regeneration 	Pink 	Does not affect undead mobs.
+11 	Resistance 	Reduces all incoming damage by 20% 	Reduces damage by 20% with each additional level 	
+
+    Enchanted golden apple
+    Beacon
+
+	Referenced by "Potion of Resistance" by game, but potion not currently present unless using custom potion features 	Mahogany 	Level +5 is full immunity to all damage, with the exception of the void and the /kill command.
+12 	Fire Resistance 	Immunity to fire and lava 	No effect 	Enchanted golden apple 	Potion of Fire Resistance 	Amber 	 
+13 	Water Breathing 	
+
+    Sets and holds the air meter at 100%
+    Increases visibility while underwater
+
+	No effect 	None 	Only available in 13w36a. Potion of Water Breathing 	Blue 	Potion can be brewed by Pufferfish as of 1.7.
+14 	Invisibility 	
+
+    Causes the entity model to disappear
+    Mobs will not attack/sense the player unless directly touched. If the player wears any one piece of armor, mobs will be able to see the player at most 1 block away; for every additional piece of armor the player equips, this distance will increase by 3, for a maximum view distance of 10 blocks if the player wears a full set.
+
+	No effect 	None 	Potion of Invisibility 	Light gray 	Armor, held items and any particles caused by effects do not disappear with the entity.
+15 	Blindness 	
+
+    Creates thick black fog around the player
+    Prevents sprinting and critical hits
+
+	No effect 	Render distance and the Void fog cause similar effects but not the status effect 	Referenced by "Potion of Blindness" by game, but potion not currently present unless using custom potion features 	Dark gray 	The Sun and Moon can be seen as normal. Also, liquids do not fade into the fog perfectly.
+16 	Night Vision 	
+
+    Increases brightness to 15 (full) everywhere
+    Increases ability to see underwater
+
+	No effect 	None 	Potion of Night Vision 	Medium blue 	Screen flashes for 10 seconds before the effect wears off. Effect does not help with seeing through the void fog, instead it changes the color of the void fog from black to sky-blue if day or dark-blue if night.
+17 	Hunger 	
+
+    Causes food meter to deplete by 0.025 food bar per tick
+    Hunger bar turns yellow-green
+
+	Increases the effect by 0.025 with each additional level 	
+
+    Rotten flesh (80% chance)
+    Raw chicken (30% chance)
+    Pufferfish (100% chance)
+
+	Referenced by "Potion of Hunger" by game, but potion not currently present unless using custom potion features 	Dull green 	 
+18 	Weakness 	
+
+    Decreases damage dealt with melee attacks by 3 hit points
+    Zombie villagers can be cured of zombification using a golden apple if they have the weakness potion effect on them.
+    Cave spiders lose ability to poison
+
+	Doubles decrease in damage with each additional level 	None 	Potion of Weakness 	Gray 	 
+19 	Poison 	
+
+    Does 1 hit point of damage every 25 ticks/1.25 seconds until the player or mob is at 1 hit point of health
+    Hearts turn yellow-green
+
+	Delay between damage is reduced by half (rounding down) with each additional level 	
+
+    Attacked by a cave spider (excluding in Easy Mode)
+    Spider eye
+    Poisonous potato (60% chance)
+
+	Potion of Poison 	Green 	Does not affect undead mobs or spiders. Will stop at half a heart.
+20 	Wither 	
+
+    Does 1 hit point of damage every 40 ticks/2 seconds (unlike poison, the effect can kill players and other entities)
+    Hearts turn black
+
+	Delay between damage is reduced by half (rounding down) with each additional level 	Attacked by the Wither and a wither skeleton 	Referenced by "Potion of Decay" by game, but potion not currently present unless using custom potion features 	Bistre 	Death is reported as "<player> withered away".
+21 	Health Boost 	Adds 4 base health; extra health vanish when the effect ends 	4 base health is added with each additional level 	None 	Referenced by "Potion of Health Boost" by game, but potion not currently present unless using custom potion features 	Orange 	Actual health may be above the base value after the effect ends and will not be capped, unless the entity is healed. Extra hearts of the mounted mob from the effect can be seen while riding a mounted mob.
+22 	Absorption 	Adds 4 absorption health that cannot be replenished by natural regeneration or other effects. Absorption health vanish when the effect ends 	4 absorption health is added with each additional level 	
+
+    Golden apple
+    Enchanted Golden Apple
+
+	Referenced by "Potion of Absorption" by game, but potion not currently present unless using custom potion features 	Azure 	Extra hearts of the mounted mob from the effect can be seen while riding a mounted mob.
+23 	Saturation 	Causes food meter to be replenished by 1 hunger point per tick. 	1 hunger point is added with each additional level 	None 	Referenced by "Potion of Saturation" by game, but potion not currently present unless using custom potion features 	Scarlet 	 
+24 	Glowing 	Causes entities to glow with an outline that can be seen through opaque blocks. 	No effect 	Being hit with a Spectral Arrow. 	Referenced by “Potion of Glowing” by game, but potion not currently present unless using custom potion features 	Olive 	 
+25 	Levitation 	Causes the entity to involuntarily rise upwards until the effect runs out. 	The entity floats up at a steady rate of level×0.9 blocks per second. 	Being hit with a Shulker's projectile. 	Referenced by “Potion of Levitation” by game, but potion not currently present unless using custom potion features 	Sky blue 	Does not affect swimming or flying. Negative levels cause the entity to float downwards, overriding the usual falling due to gravity. Fall damage is not affected.
+26 	Luck 	Increases chance of getting high-quality loot 	Adds 1 × level to attribute generic.luck. 	None 	Potion of Luck 	Avocado Green 	Makes loot table entries with a high quality score more likely, and entries with negative quality less likely. Currently, only fishing uses quality. The new weight of each entry is floor( base_weight + quality * generic.luck). Negative levels decrease luck.
+27 	Bad Luck 	Reduces chance of getting high-quality loot 	Subtracts 1 × level from attribute generic.luck. 	None 	Not referenced in-game, but available as a custom potion effect. 	Khaki 	Makes loot table entries with a high quality score less likely, and entries with negative quality more likely. Currently, only fishing uses quality. The new weight of each entry is floor( base_weight + quality * generic.luck). Negative levels increase luck.

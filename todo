@@ -1,0 +1,136 @@
+ABDL Minecraft Mod Ideas
+
+	-Continence AND Awareness
+
+		Minigame when about to have an accident. can prevent accidents completely, or cause a less "Embaressing" accident (minor accident) Randomly generated tasks (Button presses) (Tony hawk style "Manuel" meter) (meter similar to the fish minigame in stardew valley)
+		Continence affects how likely you are to leak a little (minor accident) but not release completely "full accident" (lower values), how often you have a full blown accident AND how often a phobia will cause a minor OR major accident (mid-high level values), or not notice at all (max)
+	-Phobias
+		Choose phobias early levels of regression
+		Acrophobia (fear of Heights), Arachnophobia (fear of spiders), Kinemortophobia (fear of undead) Ostiophobia Fear of Skeletons
+		What you are afraid of may cause accidents when looking directly at them (for fear of heights, looking down from a high height)
+		In return you are granted a buff/debuff for each type (Fear of heights makes you more efficient underground but makes you get nausea ocassionally when looking down from high up, Claustrophobia makes you mine slower in narrow spaces, but makes you faster (speed I) in open spaces
+
+	-Regression
+		Phobias and Effects(See Phobias)
+	6 Tiers of regression
+		-Mature (Default) (Undies speed/haste buff doubled, Having an accident makes you regress fast, Debuffs for Wearing Pullups and below, Slowly regress while wearing Pullups, Wearing Diapers makes you regress a bit faster)
+		-Immature (Choose a phobia) (undies buff normal, wearing pullups no longer regresses you, Diapers still do.) (Pranks unlocked tickling, laxatives, diuretics, etc.)
+		-Youthful (Grants buffs when you make it to the toilet (Cooldown based on Capacity), debuffs for wetting removed, Buffs for staying clean a long time)
+		-Babyish (Grants buffs while in Diapers, And using diapers, debuffs for messing removed, potty training buffs removed)
+		-Infantile (Enemies won't attack you unless provoked, Grants buffs in thick diapers and diapers, makes leaking debuffs non-existant, but lose all buffs if leaking)
+	Custom Potion Effects
+		-Adorable (Prevents enemies from atacking you)
+		-Stinky (Good and Bad Variant) Good: Enemies are put off by you, they take 25% more damage Bad: Enemies can smell you a mile away, mobs notice you easier (double detection range)		
+		-Very Stinky (Good and Bad Variant) Good: Enemies/Players who attack you within range get poisoned for 3 seconds every 10 seconds BAD: You can't believe you let yourself get this messy (weakness 1,) BOTH: you leave a trail of stinky particles wherever you walk
+		-Wet (Good Bad Variant) Good: MMmmm, so squishy! (resistance I) Bad: I should probably change soon! (weakness I) (also causes embaressment effect)
+		-Soggy (Good and Bad Variant) Good: Resistance II mixed with Strength I (Bad) causes Mortified Effect and weakness II
+		-Embaressed, Regress 1.5x as fast, upgrades to mortified if seen in leaking underwear of anykind, Lasts 10 minutes
+		-Mortified, Regress 3x as fast, Prank Awareness reduced (See Pranks) Lasts 20 Minutes
+		-Pampered (When at the babyish tier, get the pampered buff, which increases experience gain by 50%, but decreases Awareness)
+		-Used the Potty (When successfully making it to the potty at the youthful regression level, gain a 200% Experience Boost, and Luck II for 5 minutes, Packed Pampers if Nearly maxed on both Messiness and Wetness)
+		-Leaking/Full (slowness II if Diapers, Slowness I if pullups/undies)
+		-Rash, Caused by staying in Full/Leaking underwear too long, does 1 damage at random intervals
+		-Packed Pampers (Resistance III plus Strength II)
+	Underwear/Absorbency/Capacity
+		4 Tiers of usage for each type (wetting: damp, wet, soggy, leaking) (messing: squishy, messy, very messy, full)
+		Each Underwear type, has 3 tiers (sepperate from the type) early game underwear would be a tier I (basically the quality of the diaper, increases the absorbency)
+			for example a Wool Diaper (Tier I) might have an absorbency of 50 and a capacity of 25, whereas a Cloth Diaper (Tier II) would have 100 absorbency and 50 capacity
+	Potty/Potty Training
+		-You cannot go in the wilderness, you must use either a toilet or a training potty
+			Toilets/Potties have tiers just like Diapers, and hold more/expel more per tier (expelling refers to toilets, see toilets)
+			Toilets, They produce sewage when use, and must be linked up to a liquid pipe (either from the mod or a different mod)
+			Training Potties also hold a certain ammount, and must be drained of sewage after use, though they are movable and don't require pipes to function, though you cannot stack potties in your inventory. Training potties are difficult to make, the higher the tier.
+			Potty Training is an achievement tree you can access while in the Youthful regression tier or below, grants special abilities (TBD).
+	Pranks
+		-Items such as diuretics, laxatives, and regression formula can be used to drug food, lace swords with, or make potions with.
+	// done	-Actions such as tickling, and Tummy Rubs can also cause effects, though they are on a cooldown
+		
+		- All undergarments have physical items and crafting recipes
+- Undergarments are designed from player heads so that many different colors, patterns, and styles can be made
+
+- Possible for players to feed other players?
+
+- Possible to trigger accidents when Minecraft plays an ambient "scary" sound? (probability to occur affected by player stats)
+
+- Toggle for toddler-speak text translator
+
+- "Allowed caretakers" list for individual littles who accept a caretaking request from another player. Adds functions that allow the caretaking player to enact them upon the little, such as feeding, changing, and pacifying (toggles paci-speak text translator).
+		
+ what if we add pacis where you get a buff after you sleep with it on
+ swim diaper
+ 
+ Are you able to do some quick command shortcuts? Like /babchange with no extra variables will just reset the wet/messy booleans, and /babchange [type] will assume you mean yourself.
+ How about a '/babhelp' that will produce a command list for normal users, and the full command list for those with a higher permission level?
+	 
+	 
+
+- Possible for players to feed other players?
+
+- Possible to trigger accidents when Minecraft plays an ambient "scary" sound? (probability to occur affected by player stats)
+
+
+	// Yeah, seems like you could have a command to set age and have some modifiers on holding capability and how events are described to the player.
+	
+	
+	
+	Numbers:
+   Default Max Bowels: 1000
+   Default Max Bladder: 1000
+   Default Babyish: 0
+   Max Babyish: 100
+   Default PeeAwareness: 100
+   Default PooAwareness: 100
+   Default NightAwareness: 100
+
+Undies:
+   Unusued: Speed I Haste I
+   Damp (10): No effects
+   Wet (110): No effects
+   Leaking (210): Weakness II
+   Smelly (10): No Effects
+   Stinky (110): No Effects
+   Full (210): Mining Fatigue II Slowness II
+Pull-up:
+   Unused: Speed I
+   Damp (10): No effects
+   Damp (110): No effects
+   Damp (210): No effects
+   Wet (610): No effects
+   Soggy (1210): No effects
+   Soaked (1810): No effects
+   Leaky (2310): Weakness I
+   Smelly (10): No effects
+   Squishy (410): No effects
+   Stinky (710): No effects
+   Messy (1110): No effects
+   Full (1410): Mining Fatigue I Slowness I
+Diaper
+   Unused: No effects
+   Damp (100): No effects
+   Wet (1000): Strength I
+   Soggy (1800): Strength I
+   Soaked (2700): Strength II
+   Leaky (3100): Weakness I
+   Smelly (100): No effects
+   Squishy (600): Resistance I
+   Stinky (1100): Resistance I
+   Messy (1700): Resistance II
+   Full (2200): Mining Fatigue I Slowness I
+Thick_Diaper:
+   Unused: No effects
+   Damp (100): No effects
+   Wet (1500): Strength II
+   Soggy (3000): Strength II
+   Soaked (4500): Strength III
+   Leaky (5000): Weakness II
+   Smelly (100): No effects
+   Squishy (800): Resistance II
+   Stinky (1500): Resistance II
+   Messy (2300): Resistance III
+   Full (3000): Mining Fatigue II Slowness II
+	 
+	 
+add in a help 
+
+add in pacifier object
+add in messages for not needing to potty	 

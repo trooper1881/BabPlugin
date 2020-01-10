@@ -1,0 +1,66 @@
+name: BabPlugin
+main: com.trooper.babplugin.main
+version: 1.0
+api-version: 1.13
+
+commands:
+
+   change:
+      description: change a target player
+      usage: /change user diaper or /change diaper
+      
+   babstats:
+      description: Display all bab stats in json
+      usage: /babstats
+   
+   load:
+      description: load user data from file
+      usage: /load
+   
+   save:
+      description: save user data to file
+      usage: /save
+      
+   tickle:
+      description: causes a player to wet
+      usage: /tickle
+
+   rubtummy:
+      description: causes a player to mess
+      usage: /rubtummy
+
+   poo:
+      description: you mess hopefully no one smells it
+      usage: /poo
+      
+   pee:
+      description: you pee hopefully no one sees the wetspot
+      usage: /pee
+      
+   optin:
+      description: decide if you want to play with us! is a toggle.
+      usage: /optin
+      
+   optout:
+      description: for confused littles.
+      usage: /optout
+   
+   setage:
+      description: set your age
+      usage: /setage
+  
+   setrole:
+      description: set your role so others know how you want to be treated
+      usage: /setrole
+   
+   check:
+      description: Check a Player and see all stats
+      usage: /check babname
+   
+   toilet:
+      description: if you stand above a cauldron you will take care of buisness 
+      usage: /toilet   
+  
+   paci:
+      description: you pop a paci in your mouth
+      usage: /paci 

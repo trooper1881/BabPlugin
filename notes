@@ -1,0 +1,21 @@
+	Location to = event.getTo();
+			Location from = event.getFrom();
+			Player player = event.getPlayer();
+
+
+			if (to.getWorld() == from.getWorld() && to.getBlockX() == from.getBlockX() && to.getBlockY() == from.getBlockY() && to.getBlockZ() == from.getBlockZ()) 
+			{
+				//getLogger().info("you didn't move");
+				//getLogger().info("you didn't move");
+				return; // player did not actually move from one block to another. stop execution here.
+
+			}
+			else 
+			{
+				//getLogger().info(event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString());
+				if (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.carp )
+				{
+					// works
+					getLogger().info("you are on a changing table");
+				}
+			}
