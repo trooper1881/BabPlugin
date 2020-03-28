@@ -52,6 +52,9 @@ commands:
    setrole:
       description: set your role so others know how you want to be treated
       usage: /setrole
+   setrace:
+      description: set your race so others know how you want to be treated
+      usage: /setrace
    
    check:
       description: Check a Player and see all stats
@@ -62,5 +65,32 @@ commands:
       usage: /toilet   
   
    paci:
-      description: you pop a paci in your mouth
+      description: you pop a paci in your mouth unfinished
       usage: /paci 
+      
+   verbosewet:
+      description: toggle messages about being wet test
+      usage: /verbosewet
+
+   verbosemessy:
+      description: toggle messages about being messy test
+      usage: /verbosemessy  
+
+   lockbladder:
+      description: toggle to lock bladder control at set level test
+      usage: /lockbladder      
+   lockbowel:
+      description: toggle to lock bowel control at set level test
+      usage: /lockbowel         
+   invitecaretaker:
+      description: invite a player to be your mommy or daddy or other test
+      usage: /invitecaretaker name            
+   acceptcaretaker:
+      description: accept being a players mommy or daddy or other test
+      usage: /acceptcaretaker name     
+   removecaretaker:
+      description: remove a mommy daddy or other from being your caretaker test
+      usage: /removecaretaker name     
+   removelittle:
+      description: break little caretaker bond test
+      usage: /removelittle name         	

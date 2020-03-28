@@ -1,5 +1,6 @@
 package com.trooper.babplugin;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,18 +34,26 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 
 public class main extends JavaPlugin 
 {
+	// vault
+	private static Economy econ = null;
+	private static Permission perms = null;
+	private static Chat chat = null;
+
 	public static int version = 15;
 	// main timer for plugin
 	Timer timer;
@@ -62,16 +71,28 @@ public class main extends JavaPlugin
 	@Override
 	public void onEnable() 
 	{			
-		
+
 		System.out.println("[babplugin] Loading Babplugin Version "+version+". things just got REAL!.");
 		SAVELOC = this.getDataFolder().getAbsolutePath();
 
 		// FIND THE MANUAL OH NOO!
 
+		// setup vault connection
+
+		if (!setupEconomy() ) {
+			System.out.println(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+			getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
+		setupPermissions();
+		setupChat();
+
 		System.out.println("[babplugin] Commands Implemented.");
 
 		// RTFM!
 		gson.ReadConfig();
+
+
 
 		// load objects
 		try
@@ -113,9 +134,16 @@ public class main extends JavaPlugin
 		this.getCommand("setage").setExecutor(new CommandSetAge());
 		this.getCommand("toilet").setExecutor(new CommandToilet());
 		this.getCommand("setrole").setExecutor(new CommandSetRole());
+		this.getCommand("setrace").setExecutor(new CommandSetRace());
 		this.getCommand("paci").setExecutor(new CommandPaci());
-
-
+		this.getCommand("verbosewet").setExecutor(new CommandVerboseBladder());
+		this.getCommand("verbosemessy").setExecutor(new CommandVerboseBowel());
+		this.getCommand("lockbowel").setExecutor(new CommandLockBowel());	
+		this.getCommand("lockbladder").setExecutor(new CommandLockBladder());
+		this.getCommand("invitecaretaker").setExecutor(new CommandInviteCareTaker());		
+		this.getCommand("acceptcaretaker").setExecutor(new CommandAcceptCareTaker());
+		this.getCommand("removecaretaker").setExecutor(new CommandRemoveCareTaker());
+		this.getCommand("removeLittle").setExecutor(new CommandRemoveLittle());
 		System.out.println("[babplugin] Commands Implemented.");
 
 
@@ -129,6 +157,50 @@ public class main extends JavaPlugin
 
 
 	}
+
+
+	private boolean setupEconomy() {
+		if (getServer().getPluginManager().getPlugin("Vault") == null) 
+		{
+			return false;
+		}
+		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+		if (rsp == null)
+		{
+			return false;
+		}
+		econ = rsp.getProvider();
+		return econ != null;
+	}
+
+	private boolean setupChat() {
+		RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+		chat = rsp.getProvider();
+		return chat != null;
+	}
+
+	private boolean setupPermissions() 
+	{
+		RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+		perms = rsp.getProvider();
+		return perms != null;
+	}
+
+	public static Economy getEconomy() 
+	{
+		return econ;
+	}
+
+	public static Permission getPermissions() 
+	{
+		return perms;
+	}
+
+	public static Chat getChat() 
+	{
+		return chat;
+	}
+
 	public void unloadCustomObjects(CustomObject Object) 
 	{
 		/// this is how we do it!
@@ -168,6 +240,8 @@ public class main extends JavaPlugin
 			}
 		}
 	}
+
+
 	public void LoadCustomObjects(CustomObject Object) 
 	{
 		/// this is how we do it!
@@ -236,9 +310,32 @@ public class main extends JavaPlugin
 		boolean sleepAnyway;
 		boolean paci;
 		String Stage;
+		boolean lockbladder;
+		boolean lockbowel;
+		boolean verbosewet;
+		boolean verbosemessy;
+		String Race;
+
+		// who takes care of you
+		Map<UUID,CareTakerSettings> Caretakers = new HashMap<>();
+		// who you take care of
+		Map<UUID,LittleSettings> Littles = new HashMap<>();
+
 
 
 	}
+
+	public static class CareTakerSettings
+	{
+		Boolean accepted;
+		String name;
+
+	}
+	public static class LittleSettings
+	{
+		String name;
+	}
+
 	public static class CustomObject
 	{
 		Material material;
@@ -346,7 +443,6 @@ public class main extends JavaPlugin
 	{
 		public static void ReadConfig() 
 		{
-
 			File file = new File(SAVELOC , "config.json");
 
 			boolean exists = file.exists();
@@ -907,6 +1003,40 @@ public class main extends JavaPlugin
 	//handle all change on server
 	public class MyHandlerClass implements Listener
 	{
+
+
+		@EventHandler
+		public void AsyncPlayerChatEvent ( org.bukkit.event.player.AsyncPlayerChatEvent event)
+		{
+			PlayerData playerdata = BABS.get(event.getPlayer().getUniqueId());
+			Player player = event.getPlayer();
+			String name = event.getPlayer().getDisplayName();
+			String race = playerdata.Race;
+			String role = playerdata.role;
+			String rank = getPermissions().getPrimaryGroup(event.getPlayer());
+
+
+
+			ChatColor rankcolor = ChatColor.WHITE;
+			rankcolor = ChatColor.WHITE;
+			if (getPermissions().playerInGroup(event.getPlayer(), "tree-muncher")) { rankcolor = ChatColor.GRAY;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "coal-cruncher")) { rankcolor = ChatColor.BLUE;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "iron-bapper")) { rankcolor = ChatColor.DARK_GRAY;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "gold-musher")) { rankcolor = ChatColor.GOLD;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "redstone-spiller")) { rankcolor = ChatColor.DARK_RED;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "blue-shinys")) { rankcolor = ChatColor.AQUA;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "green-shinys")) { rankcolor = ChatColor.GREEN;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "black-shinys")) { rankcolor = ChatColor.BLACK;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "glowy-shinys")) { rankcolor = ChatColor.YELLOW;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "hatchy-egg")) { rankcolor = ChatColor.RED;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "hatchling")) { rankcolor = ChatColor.DARK_AQUA;}
+			if (getPermissions().playerInGroup(event.getPlayer(), "neberite-hewo")) { rankcolor = ChatColor.DARK_PURPLE;}
+
+			//if (playerdata.messy >=  playerdata.diaper) 
+			event.setFormat( rank +  "[" + rankcolor + role + " " + race + ChatColor.WHITE + "] " + name+": " + event.getMessage()); 
+		}
+
+
 		@EventHandler
 		public void playerJoined( PlayerLoginEvent event)
 
@@ -1034,6 +1164,256 @@ public class main extends JavaPlugin
 			}
 		}
 	}
+
+
+
+	//this.getCommand("removecaretaker").setExecutor(new CommandRemoveCareTaker());
+	//this.getCommand("removeLittle").setExecutor(new CommandRemoveLittle());
+
+	// /acceptcaretaker 
+	public class CommandRemoveCareTaker implements CommandExecutor
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player baby = (Player) sender;
+			UUID babUUID = baby.getUniqueId();
+			if (BABS.containsKey(babUUID))
+			{
+				PlayerData bab = BABS.get(babUUID);
+
+
+				// convert speach to baby talk give some bonus
+				Player caretaker;
+				UUID caretakerUUID;
+				try
+				{
+					caretaker = Bukkit.getPlayer(args[0]);
+					caretakerUUID = caretaker.getUniqueId();
+				}
+				catch (Exception E)
+				{
+					msg((Player) sender, "Are you sure they are exist? I dont see them" );
+					return false;
+				}
+
+				if (bab.Caretakers.containsKey(caretakerUUID))
+				{
+
+					CareTakerSettings Cts = bab.Caretakers.get(caretakerUUID);
+					// if accepted
+					if(Cts.accepted == true)
+					{
+						msg((Player) sender, "removed your CareTaker" );
+						return true;
+					}
+					if(Cts.accepted == false)
+					{
+						msg((Player) sender, "they have not accepted your offer removing the request." );
+						return true;
+					}
+					bab.Caretakers.remove(caretakerUUID);
+					BABS.put(babUUID, bab);
+					return true;
+				}
+				else
+				{
+
+					msg((Player) sender, "they are not on your list of caretakers." );
+					return false;
+				}
+			}
+			return true;
+		}
+	} 
+	public class CommandRemoveLittle implements CommandExecutor
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player caretaker = (Player) sender;
+			UUID caretakerUUID = caretaker.getUniqueId();
+			if (BABS.containsKey(caretakerUUID))
+			{
+
+				// convert speach to baby talk give some bonus
+				Player little;
+				PlayerData littledata;
+				UUID littleUUID;
+				try
+				{
+					little = Bukkit.getPlayer(args[0]);
+					littleUUID = little.getUniqueId();
+					littledata = BABS.get(littleUUID);
+				}
+				catch (Exception E)
+				{
+					msg((Player) sender, "Are you sure they exist? I dont see them" );
+					return false;
+				}
+				// if little data does not contain caretaker uuid
+				if (!littledata.Caretakers.containsKey(caretakerUUID))
+				{
+					msg((Player) sender, "you are not the babs caretaker" );
+					return true;
+				}
+				else
+				{
+
+					CareTakerSettings Cts = littledata.Caretakers.get(caretakerUUID);
+					// if accepted
+					if(Cts.accepted == true)
+					{
+						msg((Player) sender, "removing " );
+
+					}
+					if(Cts.accepted == false)
+					{
+						msg((Player) sender, "you never accepted. removing request." );
+
+					}
+					littledata.Caretakers.remove(caretakerUUID);
+					BABS.put(littleUUID,littledata);			
+
+
+				}
+			}
+
+
+			return true;
+		}
+	} 
+
+	public class CommandAcceptCareTaker implements CommandExecutor
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player caretaker = (Player) sender;
+			UUID caretakerUUID = caretaker.getUniqueId();
+			if (BABS.containsKey(caretakerUUID))
+			{
+				// convert speach to baby talk give some bonus
+				Player little;
+				PlayerData littledata;
+				UUID littleUUID;
+				try
+				{
+					little = Bukkit.getPlayer(args[0]);
+					littleUUID = little.getUniqueId();
+					littledata = BABS.get(littleUUID);
+				}
+				catch (Exception E)
+				{
+					msg((Player) sender, "Are you sure they exist? I dont see them" );
+					return false;
+				}
+				// if little data does not contain caretaker uuid
+				if (!littledata.Caretakers.containsKey(caretakerUUID))
+				{
+					msg((Player) sender, "Bab has not send you a request to be caretaker" );
+					return true;
+				}
+				else
+				{
+
+					CareTakerSettings Cts = littledata.Caretakers.get(caretakerUUID);
+					// if accepted
+					if(Cts.accepted == true)
+					{
+						msg((Player) sender, "you are already there CareTaker" );
+						return true;
+					}
+					if(Cts.accepted == false)
+					{
+						msg((Player) sender, "you have accepted to be Caretaker." );
+						Cts.accepted = true;
+						littledata.Caretakers.put(caretakerUUID,Cts);
+						BABS.put(littleUUID,littledata);
+						return true;
+					}
+
+
+				}
+			}
+
+
+			return true;
+		}
+	} 
+
+
+	public class CommandInviteCareTaker implements CommandExecutor
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player baby = (Player) sender;
+			UUID babUUID = baby.getUniqueId();
+			if (BABS.containsKey(babUUID))
+			{
+				PlayerData bab = BABS.get(babUUID);
+
+
+				// convert speach to baby talk give some bonus
+				Player caretaker;
+				UUID caretakerUUID;
+				try
+				{
+					caretaker = Bukkit.getPlayer(args[0]);
+					caretakerUUID = caretaker.getUniqueId();
+				}
+				catch (Exception E)
+				{
+					msg((Player) sender, "Are you sure they are exist? I dont see them" );
+					return false;
+				}
+
+				if (bab.Caretakers.containsKey(caretakerUUID))
+				{
+
+					CareTakerSettings Cts = bab.Caretakers.get(caretakerUUID);
+					// if accepted
+					if(Cts.accepted == true)
+					{
+						msg((Player) sender, "They are already your CareTaker" );
+						return true;
+					}
+					if(Cts.accepted == false)
+					{
+						msg((Player) sender, "they have not accepted. you can try asking them very nicely." );
+						return true;
+					}
+
+				}
+				else
+				{
+					CareTakerSettings Cts = new CareTakerSettings();
+					Cts.accepted = false;
+					Cts.name = args[0];
+					bab.Caretakers.put(caretakerUUID,Cts);
+					return true;
+				}
+
+
+
+				BABS.put(babUUID, bab);
+			}
+
+
+			return true;
+		}
+	} 
+
+
 	public class CommandPaci implements CommandExecutor
 	{
 		@Override
@@ -1078,18 +1458,18 @@ public class main extends JavaPlugin
 			// undergarments does not contain garment instead of a name
 			if (!CONFIG.UnderGarments.containsKey(args[0]))
 			{
-				
+
 				try
 				{
-				baby = Bukkit.getPlayer(args[0]);
-				babUUID = baby.getUniqueId();
+					baby = Bukkit.getPlayer(args[0]);
+					babUUID = baby.getUniqueId();
 				}
 				catch (Exception E)
 				{
 					msg((Player) sender, "Are you sure they are exist? I dont see them" );
 					return false;
 				}
-				
+
 				if (!BABS.containsKey(babUUID))
 				{
 					msg((Player) sender, "Are you sure they are here? and Opted in?" );
@@ -1311,8 +1691,32 @@ public class main extends JavaPlugin
 
 			return true;
 		}
-
 	}
+
+	public class CommandSetRace implements CommandExecutor 
+	{
+		@Override
+
+		public boolean onCommand( CommandSender sender,  Command cmd,  String statsplayer,  String[] args) 
+		{
+			// list the bab statistics untested
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			UUID babUUID = player.getUniqueId();
+			PlayerData Babstat = BABS.get(babUUID);
+
+			if (!BABS.containsKey(babUUID)) {msg(player, " you are opted out"); return false;}
+
+			Babstat.Race = args[0];
+
+			msg(player, " race set");
+			BABS.put(babUUID,Babstat);
+
+			return true;
+		}
+	}
+
 	public class CommandSave implements CommandExecutor
 
 	{
@@ -1479,6 +1883,67 @@ public class main extends JavaPlugin
 			return true;
 		}
 	}
+	public class CommandLockBowel implements CommandExecutor 
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			UUID uuid = player.getUniqueId();
+			PlayerData pottybab = BABS.get(uuid);
+			pottybab.lockbowel = !pottybab.lockbowel;
+			BABS.put(uuid,pottybab);
+			return true;
+		}
+	}
+	public class CommandLockBladder implements CommandExecutor 
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			UUID uuid = player.getUniqueId();
+			PlayerData pottybab = BABS.get(player.getUniqueId());
+			pottybab.lockbladder = !pottybab.lockbladder;
+			BABS.put(uuid,pottybab);
+			return true;
+		}
+	}
+
+	public class CommandVerboseBladder implements CommandExecutor 
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			UUID uuid = player.getUniqueId();
+			PlayerData pottybab = BABS.get(player.getUniqueId());
+			pottybab.verbosewet = !pottybab.verbosewet;
+			BABS.put(uuid,pottybab);
+			return true;
+		}
+	}
+	public class CommandVerboseBowel implements CommandExecutor 
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			UUID uuid = player.getUniqueId();
+			PlayerData pottybab = BABS.get(player.getUniqueId());
+			pottybab.verbosemessy = !pottybab.verbosemessy;
+			BABS.put(uuid,pottybab);
+			return true;
+		}
+	}
 
 	public class CommandToilet implements CommandExecutor 
 	{
@@ -1546,8 +2011,8 @@ public class main extends JavaPlugin
 		}
 		// regression
 
-		if (babystats.wet > CONFIG.RegressionWet && babystats.bladdercontrol > 0) {babystats.bladdercontrol--; }
-		if (babystats.messy > CONFIG.RegressionMess && babystats.bowelcontrol > 0) {babystats.bowelcontrol--; }
+		if (babystats.wet > CONFIG.RegressionWet && babystats.bladdercontrol > 0 && babystats.lockbladder == false) {babystats.bladdercontrol--; }
+		if (babystats.messy > CONFIG.RegressionMess && babystats.bowelcontrol > 0 && babystats.lockbowel == false) {babystats.bowelcontrol--; }
 	}
 
 	class BodyFunctionsTimer extends TimerTask 
@@ -1600,7 +2065,7 @@ public class main extends JavaPlugin
 			baby.bowel = baby.bowel + ((int)(2.0 * Math.random()));
 			//if (baby.bowelcontrol > CONFIG.NoWarningThreashHold && baby.bowel == Math.round(baby.bowelcontrol*CONFIG.BowelWarningPercentage))
 
-			if ((baby.bowelcontrol > CONFIG.NoWarningThreashHold ||  baby.bowelcontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bowel == Math.round(baby.bowelcontrol*CONFIG.BowelWarningPercentage))
+			if ((baby.bowelcontrol > CONFIG.NoWarningThreashHold ||  baby.bowelcontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bowel == Math.round(baby.bowelcontrol*CONFIG.BowelWarningPercentage) && baby.verbosewet == true)
 			{
 
 
@@ -1619,7 +2084,7 @@ public class main extends JavaPlugin
 				baby.messy++;
 				baby.bowel=0;
 
-				if (baby.bowelcontrol > CONFIG.NoWarningThreashHold || baby.bowel + ((int)(100.0 * Math.random())) >= 75)
+				if (baby.bowelcontrol > CONFIG.NoWarningThreashHold || baby.bowel + ((int)(100.0 * Math.random())) >= 75 && baby.verbosemessy == true)
 				{
 
 					if(baby.messy == 0) {msg(onlineuser, garment.MessMsgFirst);}
@@ -1637,7 +2102,7 @@ public class main extends JavaPlugin
 		public PlayerData WetDiaperUpdate(PlayerData baby, UnderGarment garment, Player onlineuser) {
 			baby.bladder = baby.bladder + ((int)(2.0 * Math.random()));
 
-			if ((baby.bladdercontrol > CONFIG.NoWarningThreashHold ||  baby.bladdercontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bladder == Math.round(baby.bladdercontrol*CONFIG.BladderWarningPercentage))
+			if ((baby.bladdercontrol > CONFIG.NoWarningThreashHold ||  baby.bladdercontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bladder == Math.round(baby.bladdercontrol*CONFIG.BladderWarningPercentage) && baby.verbosewet == true)
 			{
 
 				// first time
@@ -1655,7 +2120,7 @@ public class main extends JavaPlugin
 			{
 				baby.wet++;
 				baby.bladder=0;
-				if (baby.bowelcontrol > CONFIG.NoWarningThreashHold || baby.bowel + ((int)(100.0 * Math.random())) >= 75)
+				if (baby.bladdercontrol > CONFIG.NoWarningThreashHold || baby.bladdercontrol + ((int)(100.0 * Math.random())) >= 75 && baby.verbosewet == true)
 				{
 					// first time
 					if(baby.wet == 0) {msg(onlineuser, garment.WetMsgFirst);}
@@ -1716,6 +2181,7 @@ public class main extends JavaPlugin
 
 
 }
+
 
 
 
