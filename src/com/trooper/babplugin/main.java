@@ -1,6 +1,5 @@
 package com.trooper.babplugin;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,7 +53,8 @@ public class main extends JavaPlugin
 	private static Permission perms = null;
 	private static Chat chat = null;
 
-	public static int version = 15;
+	public static int version = 21;
+	
 	// main timer for plugin
 	Timer timer;
 	// location of all baby data
@@ -78,7 +78,6 @@ public class main extends JavaPlugin
 		// FIND THE MANUAL OH NOO!
 
 		// setup vault connection
-
 		if (!setupEconomy() ) {
 			System.out.println(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
 			getServer().getPluginManager().disablePlugin(this);
@@ -130,7 +129,7 @@ public class main extends JavaPlugin
 		this.getCommand("pee").setExecutor(new CommandPee());
 		this.getCommand("poo").setExecutor(new CommandPoo());
 		this.getCommand("optin").setExecutor(new CommandOptIn());
-		this.getCommand("optout").setExecutor(new CommandOptIn());
+		this.getCommand("optout").setExecutor(new CommandOptOut());
 		this.getCommand("setage").setExecutor(new CommandSetAge());
 		this.getCommand("toilet").setExecutor(new CommandToilet());
 		this.getCommand("setrole").setExecutor(new CommandSetRole());
@@ -254,6 +253,7 @@ public class main extends JavaPlugin
 		// The meta of the diamond sword where we can change the name, and properties of the item.
 		ItemMeta meta = NewItem.getItemMeta();
 		meta.setDisplayName(Object.Name);
+		meta.setCustomModelData(Object.customModelData);
 		NewItem.setItemMeta(meta);
 
 		NamespacedKey key = new NamespacedKey(this, Object.Name);
@@ -301,6 +301,7 @@ public class main extends JavaPlugin
 		int messy;
 		String diaper;
 		String role;
+		String race;
 		int pluginversion;
 		String description;
 		int bladder;
@@ -314,7 +315,7 @@ public class main extends JavaPlugin
 		boolean lockbowel;
 		boolean verbosewet;
 		boolean verbosemessy;
-		String Race;
+
 
 		// who takes care of you
 		Map<UUID,CareTakerSettings> Caretakers = new HashMap<>();
@@ -324,6 +325,7 @@ public class main extends JavaPlugin
 
 
 	}
+
 
 	public static class CareTakerSettings
 	{
@@ -339,6 +341,7 @@ public class main extends JavaPlugin
 	public static class CustomObject
 	{
 		Material material;
+		int customModelData;
 		String Name;
 		String[] Shape;
 		Map<Character,Material> Ingredients = new HashMap<>();
@@ -368,6 +371,11 @@ public class main extends JavaPlugin
 		Map<String,CustomObject> CustomObjects = new HashMap<>();
 
 	}
+	public static class color
+	{
+		Material material;
+		String color;
+	}
 	public static class RegresStage
 	{
 		String StageIntro;
@@ -388,10 +396,12 @@ public class main extends JavaPlugin
 	}
 	public static class UnderGarment
 	{
-		// max value to still get bonus 
-		int WetWet;
+		
+		
+		// max value to still get bonus in ml
+		int WetWet; 
 		int MessMessy;
-		// Min value To get Negative effect
+		// Min value To get Negative effect in ml
 		int WetFull;
 		int MessFull;
 		//store postive effects
@@ -469,14 +479,14 @@ public class main extends JavaPlugin
 				newconfig.BladderWarningPercentage = .75f;
 				newconfig.BowelWarningPercentage = .75f;
 
-				newconfig.Adult = 80;
-				newconfig.Teen = 70;
-				newconfig.PreTeen = 60;
-				newconfig.BigKid = 50;
-				newconfig.PreSchooler = 40;
-				newconfig.Toddler=30;
-				newconfig.Baby=20;
-				newconfig.Newborn=10;
+				newconfig.Adult = 525;
+				newconfig.Teen = 450;
+				newconfig.PreTeen = 375;
+				newconfig.BigKid = 300;
+				newconfig.PreSchooler = 225;
+				newconfig.Toddler=150;
+				newconfig.Baby=75;
+				newconfig.Newborn=20;
 
 				RegresStage Adult = new RegresStage();
 				RegresStage Teen = new RegresStage();
@@ -623,11 +633,58 @@ public class main extends JavaPlugin
 
 				// this is how you hardcode a diaper now
 
+				UnderGarment panty = new UnderGarment();
+				panty.MessMessy = 0;
+				panty.WetWet = 0;
+				panty.MessFull = 100;
+				panty.WetFull = 200;
+
+				panty.Changeconfirm = "You get cleaned up and change into a clean pair of panty.";
+				panty.Changeinto = "You got cleaned up and changed into a clean pair of panty by [agent-name].";
+
+				panty.Pee = "yellow stained panty";
+				panty.Poo = "now filled panty";
+
+				panty.Tickler = "You tickled [subject-name] until they wet their panty. The puddle forming underneath them is definitely your fault!";
+				panty.Tickled = "You were tickled mercilessly by [agent-name] until you wet your panty. The puddle forming underneath you is totally their fault!";
+
+				panty.TummyRubber = "You rub [subject-name]’s tummy, knowing they are only wearing panty. Then you very quickly realize they need a change of pants as soon as possible… What a mess!";
+				panty.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your panty. You need a change of pants as soon as possible… What a mess!";
+
+				panty.MessMsgFirst = "your panty are messy so much for staying clean";
+				panty.MessMsgMessy = "your panty are now very messy go change";
+				panty.MessMsgFull = "poop is everywhere this is getting out of hand";
+				panty.MessMsgBursting = "just call a hazmat team";
+
+				panty.MessWarnFirst = "hey. You might want to go to the bathroom before you smell up the place.";
+				panty.MessWarnMessy = "the room already smells of you. If you don't want to make it worse, go find a toilet.";
+				panty.MessWarnFull = "there is no hope. Send a rescue team.";
+				panty.MessWarnBursting = "well that pair of panty is ruined forever but if you're not careful your going to make it worse.";
+
+				panty.WetMsgFirst = "your panty turn yellow as you stain them.";
+				panty.WetMsgWet = "your already yellow panty are soaked";
+				panty.WetMsgfull = "your leaving a trail";
+				panty.WetMsgBursting = "you need to be hosed down";
+
+				panty.WetWarnFirst = "hey you need to use the bathroom unless you want to stain your panty";
+				panty.WetWarnWet = "they are already wet. But you should really try to make it to the bathroom";
+				panty.WetWarnfull = "I am not convinced your mature enough for panty";
+				panty.WetWarnBursting = "yeah. Your going to wet your panty again. I think you like it.";
+
+
+
+				panty.CleanEffects.add(new PotionEffect(PotionEffectType.SPEED,Integer.MAX_VALUE,1));
+
+				panty.DirtyEffects.add(new PotionEffect(PotionEffectType.SLOW,Integer.MAX_VALUE,1));
+				panty.DirtyEffects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING,Integer.MAX_VALUE,1));
+
+				newconfig.UnderGarments.put("panty",panty);
+				
 				UnderGarment Undies = new UnderGarment();
 				Undies.MessMessy = 0;
 				Undies.WetWet = 0;
-				Undies.MessFull = 2;
-				Undies.WetFull = 2;
+				Undies.MessFull = 100;
+				Undies.WetFull = 200;
 
 				Undies.Changeconfirm = "You get cleaned up and change into a clean pair of undies.";
 				Undies.Changeinto = "You got cleaned up and changed into a clean pair of undies by [agent-name].";
@@ -671,10 +728,10 @@ public class main extends JavaPlugin
 				newconfig.UnderGarments.put("undies",Undies);
 
 				UnderGarment Pullup = new UnderGarment();
-				Pullup.MessMessy = 1;
-				Pullup.WetWet = 3;
-				Pullup.MessFull = 3;
-				Pullup.WetFull = 5;
+				Pullup.MessMessy = 800;
+				Pullup.WetWet = 1600;
+				Pullup.MessFull = 1800;
+				Pullup.WetFull = 2400;
 
 				Pullup.Changeconfirm = "You clean up [subject-name] and help them into a new pull-up.";
 				Pullup.Changeinto = "You got cleaned up and helped into a new pull-up by [agent-name].";
@@ -717,10 +774,10 @@ public class main extends JavaPlugin
 				newconfig.UnderGarments.put("pullup",Pullup);
 
 				UnderGarment ThickDiaper = new UnderGarment();
-				ThickDiaper.MessMessy = 3;
-				ThickDiaper.WetWet = 7;
-				ThickDiaper.MessFull = 8;
-				ThickDiaper.WetFull = 5;
+				ThickDiaper.MessMessy = 1400;
+				ThickDiaper.WetWet = 1800;
+				ThickDiaper.MessFull = 1800;
+				ThickDiaper.WetFull = 2200;
 
 				ThickDiaper.Changeconfirm = " You give [subject-name] a change, putting them into a thick diaper. They’re going to walk with a noticeable waddle!";
 				ThickDiaper.Changeinto = "You got changed by [agent-name], who put you into a thick diaper. You’re going to walk with a noticeable waddle!";
@@ -767,10 +824,10 @@ public class main extends JavaPlugin
 
 
 				UnderGarment Diaper = new UnderGarment();
-				Diaper.MessMessy = 2;
-				Diaper.WetWet = 5;
-				Diaper.MessFull = 4;
-				Diaper.WetFull = 7;
+				Diaper.MessMessy = 600;
+				Diaper.WetWet = 800;
+				Diaper.MessFull = 800;
+				Diaper.WetFull = 1200;
 
 				Diaper.Changeconfirm = " You give [subject-name] a change, putting them into a fresh diaper. A telltale crinkling follows their every step!";
 				Diaper.Changeinto = "You got changed by [agent-name], who put you into a fresh diaper. A telltale crinkling follows your every step!";
@@ -812,9 +869,13 @@ public class main extends JavaPlugin
 
 				newconfig.UnderGarments.put("diaper",Diaper);
 				// custom object section
-
+				Map<Integer, color> colorlist = new HashMap<Integer, color>();
+				
+				//colorlist.put(0, 
+				
 				CustomObject ThickDiaperObj = new CustomObject();
-				ThickDiaperObj.material = Material.PINK_WOOL;
+				ThickDiaperObj.material = Material.SCUTE;
+				ThickDiaperObj.customModelData = 400;
 				ThickDiaperObj.Name = "thickdiaper";
 				ThickDiaperObj.Shape = new String[]{"SWS","SWS","WWW"};
 				ThickDiaperObj.Ingredients.put('W',Material.WHITE_WOOL);
@@ -822,7 +883,8 @@ public class main extends JavaPlugin
 				newconfig.CustomObjects.put("thickdiaper",ThickDiaperObj);
 
 				CustomObject DiaperObj = new CustomObject();
-				DiaperObj.material = Material.WHITE_WOOL;
+				DiaperObj.material = Material.SCUTE;
+				DiaperObj.customModelData = 300;
 				DiaperObj.Name = "diaper";
 				DiaperObj.Shape = new String[]{"   ","SWS","WWW"};
 				DiaperObj.Ingredients.put('W',Material.WHITE_WOOL);
@@ -830,20 +892,30 @@ public class main extends JavaPlugin
 				newconfig.CustomObjects.put("diaper",DiaperObj);
 
 				CustomObject PullupObj = new CustomObject();
-				PullupObj.material = Material.YELLOW_WOOL;
+				PullupObj.material = Material.SCUTE;
+				PullupObj.customModelData = 200;
 				PullupObj.Name = "pullup";
-				PullupObj.Shape = new String[]{"   ","YWY","WWW"};
+				PullupObj.Shape = new String[]{"   ","WWW","WWW"};
 				PullupObj.Ingredients.put('W',Material.WHITE_WOOL);
-				PullupObj.Ingredients.put('Y',Material.YELLOW_WOOL);
 				newconfig.CustomObjects.put("pullup",PullupObj);
 
 				CustomObject UndiesObj = new CustomObject();
-				UndiesObj.material = Material.LIGHT_GRAY_WOOL;
+				UndiesObj.material = Material.SCUTE;
+				UndiesObj.customModelData = 100;
 				UndiesObj.Name = "undies";
 				UndiesObj.Shape = new String[]{"   ","SWS"," W "};
 				UndiesObj.Ingredients.put('W',Material.WHITE_WOOL);
 				UndiesObj.Ingredients.put('S',Material.STRING);
 				newconfig.CustomObjects.put("undies",UndiesObj);
+				
+				CustomObject PantyObj = new CustomObject();
+				PantyObj.material = Material.SCUTE;
+				PantyObj.customModelData = 500;
+				PantyObj.Name = "panty";
+				PantyObj.Shape = new String[]{"SWS"," W ","   "};
+				PantyObj.Ingredients.put('W',Material.WHITE_WOOL);
+				PantyObj.Ingredients.put('S',Material.STRING);
+				newconfig.CustomObjects.put("panty",PantyObj);
 
 
 
@@ -898,11 +970,12 @@ public class main extends JavaPlugin
 				PlayerData newborn = new PlayerData();
 				newborn.pluginversion = version;
 				newborn.age = 0;
-				newborn.bladdercontrol =90;
-				newborn.bowelcontrol =90;
+				newborn.bladdercontrol =500;
+				newborn.bowelcontrol =500;
 				newborn.optIn = true;
 				newborn.diaper = "diaper";
 				newborn.role = "new";
+				newborn.race = "human";
 				BABS.put(babUUID,newborn);
 				write(player);
 
@@ -919,22 +992,15 @@ public class main extends JavaPlugin
 					// read file at plugins folder then convert from json into object then add into babs
 					PlayerData baby = gson.fromJson(new FileReader(file),PlayerData.class);
 					// if baby wants to play
-					if (baby.optIn)
+					if (baby.optIn == false)
 					{
-						baby.optIn = false;
-						BABS.put(babUUID,baby);
-						write(player);
-						BABS.remove(babUUID);
-						msg(player, "you have opted out");
-
-					}
-					else if (!baby.optIn)
-					{
-						//read(player);
-
 						baby.optIn = true;
 						BABS.put(babUUID,baby);
 						msg(player,"you have opted in");
+					}
+					else
+					{
+						msg(player,"you are already opted in");
 					}
 				}
 
@@ -942,6 +1008,29 @@ public class main extends JavaPlugin
 				{
 					e.printStackTrace();
 				} 
+			}
+		}
+		public static void optOut( Player player) 
+		{
+			// toggle if bab wants to play
+
+			// find the uuid for the player
+			UUID babUUID = player.getUniqueId();
+
+			if (BABS.containsKey(babUUID))
+			{
+				PlayerData baby = BABS.get(babUUID);
+				baby.optIn = false;
+				BABS.put(babUUID,baby);
+				write(player);
+				// optout means you still can use the tags this cant go
+				//	BABS.remove(babUUID);
+				msg(player, "you have opted out");
+
+			}
+			else
+			{
+				msg(player,"you have already opted out");
 			}
 		}
 
@@ -964,6 +1053,9 @@ public class main extends JavaPlugin
 					// read file at plugins folder then convert from json into object then add into babs
 					PlayerData baby = gson.fromJson(new FileReader(file),PlayerData.class);
 					// if baby wants to play
+
+
+
 					if (baby.optIn)
 					{
 						BABS.put(babUUID,baby);
@@ -1008,17 +1100,14 @@ public class main extends JavaPlugin
 		@EventHandler
 		public void AsyncPlayerChatEvent ( org.bukkit.event.player.AsyncPlayerChatEvent event)
 		{
-			PlayerData playerdata = BABS.get(event.getPlayer().getUniqueId());
-			Player player = event.getPlayer();
+			String race = "NewBab";
+			String role = "baby";
+
+			ChatColor bracketcolor = ChatColor.DARK_GRAY;
+
 			String name = event.getPlayer().getDisplayName();
-			String race = playerdata.Race;
-			String role = playerdata.role;
-			String rank = getPermissions().getPrimaryGroup(event.getPlayer());
-
-
 
 			ChatColor rankcolor = ChatColor.WHITE;
-			rankcolor = ChatColor.WHITE;
 			if (getPermissions().playerInGroup(event.getPlayer(), "tree-muncher")) { rankcolor = ChatColor.GRAY;}
 			if (getPermissions().playerInGroup(event.getPlayer(), "coal-cruncher")) { rankcolor = ChatColor.BLUE;}
 			if (getPermissions().playerInGroup(event.getPlayer(), "iron-bapper")) { rankcolor = ChatColor.DARK_GRAY;}
@@ -1032,10 +1121,62 @@ public class main extends JavaPlugin
 			if (getPermissions().playerInGroup(event.getPlayer(), "hatchling")) { rankcolor = ChatColor.DARK_AQUA;}
 			if (getPermissions().playerInGroup(event.getPlayer(), "neberite-hewo")) { rankcolor = ChatColor.DARK_PURPLE;}
 
-			//if (playerdata.messy >=  playerdata.diaper) 
-			event.setFormat( rank +  "[" + rankcolor + role + " " + race + ChatColor.WHITE + "] " + name+": " + event.getMessage()); 
-		}
 
+			if (BABS.containsKey(event.getPlayer().getUniqueId()))
+			{
+
+				PlayerData playerdata = BABS.get(event.getPlayer().getUniqueId());
+
+				race = playerdata.race;
+				role = playerdata.role;
+
+				UnderGarment undergarment = CONFIG.UnderGarments.get(playerdata.diaper);
+
+				if (playerdata.wet <= undergarment.WetWet  && playerdata.messy <= undergarment.MessMessy )
+				{
+					bracketcolor = ChatColor.WHITE;
+
+				}
+				if (playerdata.wet > undergarment.WetFull || playerdata.messy > undergarment.MessFull)
+				{
+					// very dirty
+					bracketcolor = ChatColor.YELLOW;
+				}
+				if (playerdata.paci == false)
+				{
+				event.setFormat( bracketcolor +"[" + rankcolor + role + " " + race + bracketcolor + "] " + ChatColor.WHITE + name+": " + event.getMessage()); 
+			
+				}
+				if (playerdata.paci == true)
+				{
+					String babtalk = event.getMessage();
+					babtalk = babtalk.replace('r','w');
+					babtalk = babtalk.replace('l','w');
+					babtalk = babtalk.replaceAll("oo","o");
+					babtalk = babtalk.replaceAll("me ","mes ");
+					babtalk = babtalk.replaceAll("er","wa");
+							
+				event.setFormat( bracketcolor +"[" + rankcolor + role + " " + race + bracketcolor + "] " + ChatColor.WHITE + name+": " + babtalk); 
+			
+				}
+			}
+			if (!BABS.containsKey(event.getPlayer().getUniqueId()))
+			{	
+				if (getPermissions().playerInGroup(event.getPlayer(), "tree-muncher")) { race = "Tree-Muncher";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "coal-cruncher")) { race = "Coal-Cruncher";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "iron-bapper")) { race = "Iron-Bapper";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "gold-musher")) { race = "Gold-Musher";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "redstone-spiller")) { race = "Redstone-Spiller";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "blue-shinys")) { race = "Blue-Shinys";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "green-shinys")) { race = "Green-Shinys";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "black-shinys")) { race = "Black-Shinys";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "glowy-shinys")) { race = "Glowy-Shinys";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "hatchy-egg")) { race = "Hatchy-Egg";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "hatchling")) { race = "Hatchling";}
+				if (getPermissions().playerInGroup(event.getPlayer(), "neberite-hewo")) { race = "NEBERITE-HERO";}
+				event.setFormat( bracketcolor +"[" + rankcolor + race + bracketcolor + "] " + ChatColor.WHITE + name+": " + event.getMessage());
+			}
+		}
 
 		@EventHandler
 		public void playerJoined( PlayerLoginEvent event)
@@ -1207,12 +1348,10 @@ public class main extends JavaPlugin
 					if(Cts.accepted == true)
 					{
 						msg((Player) sender, "removed your CareTaker" );
-						return true;
 					}
 					if(Cts.accepted == false)
 					{
 						msg((Player) sender, "they have not accepted your offer removing the request." );
-						return true;
 					}
 					bab.Caretakers.remove(caretakerUUID);
 					BABS.put(babUUID, bab);
@@ -1220,7 +1359,6 @@ public class main extends JavaPlugin
 				}
 				else
 				{
-
 					msg((Player) sender, "they are not on your list of caretakers." );
 					return false;
 				}
@@ -1269,7 +1407,6 @@ public class main extends JavaPlugin
 					if(Cts.accepted == true)
 					{
 						msg((Player) sender, "removing " );
-
 					}
 					if(Cts.accepted == false)
 					{
@@ -1347,8 +1484,6 @@ public class main extends JavaPlugin
 			return true;
 		}
 	} 
-
-
 	public class CommandInviteCareTaker implements CommandExecutor
 	{
 		@Override
@@ -1412,8 +1547,6 @@ public class main extends JavaPlugin
 			return true;
 		}
 	} 
-
-
 	public class CommandPaci implements CommandExecutor
 	{
 		@Override
@@ -1430,8 +1563,15 @@ public class main extends JavaPlugin
 
 				//toggle paci
 				bab.paci ^=true;
-				if (bab.paci == true) {msg((Player) sender,"You put a Paci in your mouth");}
-				if (bab.paci == false) {msg((Player) sender,"You remove a Paci from your mouth");}
+				if (bab.paci == true) 
+					{
+					
+					msg((Player) sender,"You put a Paci in your mouth");
+					}
+				else if (bab.paci == false) 
+					{
+					msg((Player) sender,"You remove a Paci from your mouth");
+					}
 				BABS.put(babUUID, bab);
 			}
 
@@ -1708,7 +1848,7 @@ public class main extends JavaPlugin
 
 			if (!BABS.containsKey(babUUID)) {msg(player, " you are opted out"); return false;}
 
-			Babstat.Race = args[0];
+			Babstat.race = args[0];
 
 			msg(player, " race set");
 			BABS.put(babUUID,Babstat);
@@ -1771,7 +1911,8 @@ public class main extends JavaPlugin
 			// get stats of the bab 
 			PlayerData changedbab = BABS.get(babUUID);
 
-			changedbab.messy++;
+			changedbab.messy = changedbab.messy + changedbab.bowel;
+			changedbab.bowel = 0;
 
 			// save stats about player in map
 			BABS.put(babUUID,changedbab);
@@ -1801,7 +1942,8 @@ public class main extends JavaPlugin
 			// get stats of the bab 
 			PlayerData changedbab = BABS.get(babUUID);
 
-			changedbab.wet++;
+			changedbab.wet = changedbab.wet + changedbab.bladder;
+			changedbab.bladder = 0;
 
 			// save stats about player in map
 			BABS.put(babUUID,changedbab);
@@ -1831,7 +1973,8 @@ public class main extends JavaPlugin
 			// get stats of the bab 
 			PlayerData changedbab = BABS.get(babUUID);
 
-			changedbab.messy++;
+			changedbab.messy = changedbab.messy + changedbab.bowel;
+			changedbab.bowel = 0;
 
 			// save stats about player in map
 			BABS.put(babUUID,changedbab);
@@ -1858,7 +2001,8 @@ public class main extends JavaPlugin
 
 			PlayerData changedbab = BABS.get(babUUID);
 
-			changedbab.wet++;
+			changedbab.wet = changedbab.wet + changedbab.bladder;
+			changedbab.bladder = 0;
 
 			// save stats about player in map
 			BABS.put(babUUID,changedbab);
@@ -1882,6 +2026,24 @@ public class main extends JavaPlugin
 
 			return true;
 		}
+
+
+	}
+
+	public class CommandOptOut implements CommandExecutor 
+	{
+		@Override
+		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
+		{
+			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
+
+			Player player = (Player) sender;
+			gson.optOut(player);
+
+			return true;
+		}
+
+
 	}
 	public class CommandLockBowel implements CommandExecutor 
 	{
@@ -2026,13 +2188,12 @@ public class main extends JavaPlugin
 				{
 					for ( UUID playeruuid : BABS.keySet())
 					{
-
+						
 						PlayerData baby = BABS.get(playeruuid);
 						UnderGarment garment = CONFIG.UnderGarments.get(baby.diaper);
 						Player onlineuser = Bukkit.getPlayer(playeruuid);
 						if (baby.optIn)
 						{
-
 							baby = SetStage(baby);
 							baby = WetDiaperUpdate(baby, garment, onlineuser);
 							baby = MessyDiaperUpdate(baby, garment, onlineuser);
@@ -2048,7 +2209,8 @@ public class main extends JavaPlugin
 			}
 		}
 
-		public PlayerData SetStage(PlayerData baby) {
+		public PlayerData SetStage(PlayerData baby) 
+		{
 			double stage = (baby.bladdercontrol + baby.bowelcontrol)/2;
 			if (stage >= 0 && stage < CONFIG.Newborn) {baby.Stage = "Newborn";}
 			else if (stage >= CONFIG.Newborn && stage < CONFIG.Baby){baby.Stage = "Baby";}
@@ -2058,17 +2220,22 @@ public class main extends JavaPlugin
 			else if (stage >= CONFIG.BigKid && stage < CONFIG.PreTeen){baby.Stage = "PreTeen";}
 			else if (stage >= CONFIG.PreTeen && stage < CONFIG.Teen){baby.Stage = "Teen";}
 			else if (stage >= CONFIG.Teen){baby.Stage = "Adult"; }
+	
 			return baby;
 		}
 
 		public PlayerData MessyDiaperUpdate(PlayerData baby, UnderGarment garment, Player onlineuser) {
+		
+			if(baby.lockbowel == false)
+			{
+			  
 			baby.bowel = baby.bowel + ((int)(2.0 * Math.random()));
+
+			}
 			//if (baby.bowelcontrol > CONFIG.NoWarningThreashHold && baby.bowel == Math.round(baby.bowelcontrol*CONFIG.BowelWarningPercentage))
 
 			if ((baby.bowelcontrol > CONFIG.NoWarningThreashHold ||  baby.bowelcontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bowel == Math.round(baby.bowelcontrol*CONFIG.BowelWarningPercentage) && baby.verbosewet == true)
 			{
-
-
 				// first time
 				if(baby.messy == 0) {msg(onlineuser, garment.MessWarnFirst);}
 				// until the garment is saturated
@@ -2081,7 +2248,7 @@ public class main extends JavaPlugin
 
 			if (baby.bowel > baby.bowelcontrol)
 			{
-				baby.messy++;
+				baby.messy = baby.messy + baby.bowel;
 				baby.bowel=0;
 
 				if (baby.bowelcontrol > CONFIG.NoWarningThreashHold || baby.bowel + ((int)(100.0 * Math.random())) >= 75 && baby.verbosemessy == true)
@@ -2100,11 +2267,19 @@ public class main extends JavaPlugin
 		}
 
 		public PlayerData WetDiaperUpdate(PlayerData baby, UnderGarment garment, Player onlineuser) {
+			// if your bladder stats are unlocked
+			if(baby.lockbladder == false)
+			{
+				// amount that bladder fills this turn
 			baby.bladder = baby.bladder + ((int)(2.0 * Math.random()));
-
+			}
+			// if your bladder control is greater then the no warning threshhold 
+			// bladder control plus a random percentage less then 75
+			// shit if i know this thing is out of control
+			// and verbose is true
 			if ((baby.bladdercontrol > CONFIG.NoWarningThreashHold ||  baby.bladdercontrol + ((int)(100.0 * Math.random())) >= 75) && baby.bladder == Math.round(baby.bladdercontrol*CONFIG.BladderWarningPercentage) && baby.verbosewet == true)
 			{
-
+				// checked for ml update
 				// first time
 				if(baby.wet == 0) {msg(onlineuser, garment.WetWarnFirst);}
 				// until the garment is saturated
@@ -2115,10 +2290,12 @@ public class main extends JavaPlugin
 				else if(baby.wet > garment.WetFull) {msg(onlineuser, garment.WetWarnBursting);}
 
 			}
+			// 
 			// determine if you have wet your self
 			if (baby.bladder > baby.bladdercontrol)
 			{
-				baby.wet++;
+				// empty bladder into diaper
+				baby.wet = baby.wet + baby.bladder;
 				baby.bladder=0;
 				if (baby.bladdercontrol > CONFIG.NoWarningThreashHold || baby.bladdercontrol + ((int)(100.0 * Math.random())) >= 75 && baby.verbosewet == true)
 				{
