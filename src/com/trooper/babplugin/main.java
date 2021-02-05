@@ -499,9 +499,9 @@ public class main extends JavaPlugin
 
 				Adult.BladderFullBeforeBed = "Forgot the bathroom in my routine.";
 				Teen.BladderFullBeforeBed = "Woops, need to pee...";
-				PreTeen.BladderFullBeforeBed = "Ugh, I don’t want to get back up to go to the bathroom!";
-				BigKid.BladderFullBeforeBed = "I won’t pee the bed. I can make it to morning.";
-				PreSchooler.BladderFullBeforeBed = "Dun wanna wet my bed… *Wriggle*";
+				PreTeen.BladderFullBeforeBed = "Ugh, I don't want to get back up to go to the bathroom!";
+				BigKid.BladderFullBeforeBed = "I won't pee the bed. I can make it to morning.";
+				PreSchooler.BladderFullBeforeBed = "Dun wanna wet my bed' *Wriggle*";
 				Toddler.BladderFullBeforeBed = "NO, potty!";
 				Baby.BladderFullBeforeBed = "*SQUIRM*";
 				Newborn.BladderFullBeforeBed = "*Giggle*";
@@ -510,27 +510,27 @@ public class main extends JavaPlugin
 				Teen.BowelFullBeforeBed = "No way am I messing the bed.";
 				PreTeen.BowelFullBeforeBed = "I am way too mature to poop in my sleep.";
 				BigKid.BowelFullBeforeBed = "I should go to the bathroom first!";
-				PreSchooler.BowelFullBeforeBed = "I don’t want to wake up stinky...";
+				PreSchooler.BowelFullBeforeBed = "I don't want to wake up stinky...";
 				Toddler.BowelFullBeforeBed = "Bafwoom!";
-				Baby.BowelFullBeforeBed = "Where’s my stuffie?";
+				Baby.BowelFullBeforeBed = "Whereï¿½s my stuffie?";
 				Newborn.BowelFullBeforeBed = "Coo...";
 
 
-				Adult.DiaperChecked = "Hey! I’m an adult! I shouldn’t be getting checked by [agent-name]...";
+				Adult.DiaperChecked = "Hey! I'm an adult! I shouldn't be getting checked by [agent-name]...";
 				Teen.DiaperChecked = "OMG! I just got checked by [agent-name]!";
-				PreTeen.DiaperChecked = "Come on... I’m mature! Why did I just get checked by [agent-name]?";
-				BigKid.DiaperChecked = "Hey! People can see us... Don’t check me here, [agent-name]!";
+				PreTeen.DiaperChecked = "Come on... I'm mature! Why did I just get checked by [agent-name]?";
+				BigKid.DiaperChecked = "Hey! People can see us... Don't check me here, [agent-name]!";
 				PreSchooler.DiaperChecked = "Pff, I dun need a change! But I just got checked by [agent-name]...";
-				Toddler.DiaperChecked = "What, aren’t I clean? But I’m getting checked by [agent-name]...";
-				Baby.DiaperChecked = "You squirm as you’re checked by [agent-name].";
-				Newborn.DiaperChecked = "*Giggle* You’re being checked by [agent-name].";
+				Toddler.DiaperChecked = "What, aren't I clean? But I'm getting checked by [agent-name]...";
+				Baby.DiaperChecked = "You squirm as you're checked by [agent-name].";
+				Newborn.DiaperChecked = "*Giggle* You're being checked by [agent-name].";
 
 
 				Adult.DiaperChecker = "You check [subject-name], but they are an adult.";
 				Teen.DiaperChecker = "You check [subject-name], but they are a teenager.";
 				PreTeen.DiaperChecker = "You check [subject-name] and find";
 				BigKid.DiaperChecker = "You check  [subject-name]. They try so hard to stay clean.";
-				PreSchooler.DiaperChecker = "Accidents happen,  [subject-name]. Don’t be surprised.";
+				PreSchooler.DiaperChecker = "Accidents happen,  [subject-name]. Don't be surprised.";
 				Toddler.DiaperChecker = "[subject-name] is just starting to potty train, but sometimes they forget.";
 				Baby.DiaperChecker  = "Aww, did someone make a stinky,  [subject-name]?";
 				Newborn.DiaperChecker = "Who is just the cutest?  [subject-name]!";
@@ -541,46 +541,46 @@ public class main extends JavaPlugin
 				PreTeen.JoinServer = "Welcome back! Time to play!";
 				BigKid.JoinServer = "Welcome back! Did you sleep well?";
 				PreSchooler.JoinServer = "Welcome back! Ready for another big day?";
-				Toddler.JoinServer = "Welcome back! Oh, you’re adorable!";
+				Toddler.JoinServer = "Welcome back! Oh, you're adorable!";
 				Baby.JoinServer = "Welcome back! Who is the cutest?";
 				Newborn.JoinServer = "Welcome back! Aww!";
 
 
 				Adult.MessTheBed = "After waking, you realize you soiled the bed at some point in your sleep... How will you live with the shame?";
-				Teen.MessTheBed = "You feel a mushy squish as you sit up… No way! How did I poop my bed without even waking up?";
-				PreTeen.MessTheBed = "It doesn’t take long for you to notice the dirty feeling against your rump… Wha… Did I really poop myself while sleeping?";
-				BigKid.MessTheBed = "A rather yucky scent greets you as you finally wake… Oh no! I actually messed my bed! But I’m no baby!";
-				PreSchooler.MessTheBed = "Something doesn’t feel quite right... Uh-oh... I went poopy in my sleep!";
-				Toddler.MessTheBed = "You wake to a new day, feeling something smush underneath your weight… I dun think I should still be wakin’ up smelly...";
+				Teen.MessTheBed = "You feel a mushy squish as you sit up. No way! How did I poop my bed without even waking up?";
+				PreTeen.MessTheBed = "It doesnï¿½t take long for you to notice the dirty feeling against your rumpï¿½ Whaï¿½ Did I really poop myself while sleeping?";
+				BigKid.MessTheBed = "A rather yucky scent greets you as you finally wake. Oh no! I actually messed my bed! But Iï¿½m no baby!";
+				PreSchooler.MessTheBed = "Something doesnï¿½t feel quite right... Uh-oh... I went poopy in my sleep!";
+				Toddler.MessTheBed = "You wake to a new day, feeling something smush underneath your weight. I dun think I should still be wakin' up smelly...";
 				Baby.MessTheBed = "Waking up stinky in the morning is expected for you.";
-				Newborn.MessTheBed = "You don’t even notice the smell from your pants as you wake up to a new morning.";
+				Newborn.MessTheBed = "You don't even notice the smell from your pants as you wake up to a new morning.";
 
 
-				Adult.WetTheBed = "Waking up from a full night’s rest, you realize you’ve wet your bed! So much for being an adult...";
+				Adult.WetTheBed = "Waking up from a full night's rest, you realize you've wet your bed! So much for being an adult...";
 				Teen.WetTheBed = "You eventually rise from your night of slumber, only to notice a cold wetness telling you that you peed in your sleep like some sort of little kid!";
 				PreTeen.WetTheBed = "Your eyes quickly widen as you wake up from a restful night of sleep and catch the unexpected scent of pee.";
-				BigKid.WetTheBed = "Wait, I’m wet? Did I really pee while sleeping? Only little kids should do that...";
-				PreSchooler.WetTheBed = "I can’t keep wetting the bed like a baby… I didn’t even wake up while going!";
-				Toddler.WetTheBed = "I’ll stop bedwetting eventually! Good thing I can sleep through it.";
-				Baby.WetTheBed = "Waking up wet is no big deal. You feel fully rested, and that’s all that matters!";
+				BigKid.WetTheBed = "Wait, I'm wet? Did I really pee while sleeping? Only little kids should do that...";
+				PreSchooler.WetTheBed = "I can't keep wetting the bed like a baby! I didn't even wake up while going!";
+				Toddler.WetTheBed = "I'll stop bedwetting eventually! Good thing I can sleep through it.";
+				Baby.WetTheBed = "Waking up wet is no big deal. You feel fully rested, and that's all that matters!";
 				Newborn.WetTheBed = "After waking up from a restful sleep, you barely notice the wet feeling between your legs.";
 
 
-				Adult.MessTheBedWake = "You wake up tonight to a gross feeling forming in your pants... YUCK! Adults don’t mess the bed!";
-				Teen.MessTheBedWake = "You’re woken from your sleep early as you feel your lower muscles tensed, as if pushing something out… You gasp in shock! You can’t be pooping your bed as a teenager!";
-				PreTeen.MessTheBedWake = "Consciousness returns to you earlier than expected as you wake to the sensation of emptying your bowels into your pants… But something like this should only happen to babies!";
-				BigKid.MessTheBedWake = "Your slumber is interrupted early tonight, as you wake to the feeling of fading urgency and a muddy sensation in the seat of your pants… You blush intensely as you realize you just messed your bed like a little baby!";
-				PreSchooler.MessTheBedWake = "You groggily rub your eyes, still feeling sleepy, while a yucky smell enters your nostrils… *Gasp* You’ve just poopied yourself in bed!";
-				Toddler.MessTheBedWake = "Your slumber is interrupted as you hear yourself grunting and feel something exiting your rump… You realize what you’re doing and feel a little disappointed that potty training isn’t taking in your sleep.";
+				Adult.MessTheBedWake = "You wake up tonight to a gross feeling forming in your pants... YUCK! Adults don't mess the bed!";
+				Teen.MessTheBedWake = "You're woken from your sleep early as you feel your lower muscles tensed, as if pushing something out. You gasp in shock! You can't be pooping your bed as a teenager!";
+				PreTeen.MessTheBedWake = "Consciousness returns to you earlier than expected as you wake to the sensation of emptying your bowels into your pants! But something like this should only happen to babies!";
+				BigKid.MessTheBedWake = "Your slumber is interrupted early tonight, as you wake to the feeling of fading urgency and a muddy sensation in the seat of your pants. You blush intensely as you realize you just messed your bed like a little baby!";
+				PreSchooler.MessTheBedWake = "You groggily rub your eyes, still feeling sleepy, while a yucky smell enters your nostrils. *Gasp* You've just poopied yourself in bed!";
+				Toddler.MessTheBedWake = "Your slumber is interrupted as you hear yourself grunting and feel something exiting your rump. You realize what you're doing and feel a little disappointed that potty training isn't taking in your sleep.";
 				Baby.MessTheBedWake = "A feeling of fullness in your lower body is fading away as you wake up a bit early to your liking. You just feel like rolling over and going back to sleep.";
 				Newborn.MessTheBedWake = "Your eyes blink open during the night as you feel your lower belly getting emptier while your pants feel fuller. You wanna giggle to the funny feeling and shut your eyes again.";
 
-				Adult.WetTheBedWake = "You wake up to a warmth spreading from your groin tonight… YUCK! Adults don’t wet the bed!";
-				Teen.WetTheBedWake = "You wake up to a wet bed. teens don’t wet the bed!";
-				PreTeen.WetTheBedWake = "Consciousness returns to you earlier than expected as you wake to the sensation of emptying your bladder into your pants… But something like this should only happen to babies!";
-				BigKid.WetTheBedWake = "Your slumber is interrupted early tonight, as you wake to the feeling of fading urgency and a wet sensation in the groin of your pants… You blush intensely as you realize you just wet your bed like a little baby!";
-				PreSchooler.WetTheBedWake = "You groggily rub your eyes, still feeling sleepy, while you notice *Gasp* You’ve wet the bed!";
-				Toddler.WetTheBedWake = "Your slumber is interrupted as you find yourself squirming and feel yourself peeing… You realize what you’re doing and feel a little disappointed that potty training isn’t taking in your sleep.";
+				Adult.WetTheBedWake = "You wake up to a warmth spreading from your groin tonight. YUCK! Adults don't wet the bed!";
+				Teen.WetTheBedWake = "You wake up to a wet bed. teens don't wet the bed!";
+				PreTeen.WetTheBedWake = "Consciousness returns to you earlier than expected as you wake to the sensation of emptying your bladder into your pants. But something like this should only happen to babies!";
+				BigKid.WetTheBedWake = "Your slumber is interrupted early tonight, as you wake to the feeling of fading urgency and a wet sensation in the groin of your pants. You blush intensely as you realize you just wet your bed like a little baby!";
+				PreSchooler.WetTheBedWake = "You groggily rub your eyes, still feeling sleepy, while you notice *Gasp* You've wet the bed!";
+				Toddler.WetTheBedWake = "Your slumber is interrupted as you find yourself squirming and feel yourself peeing. You realize what you're doing and feel a little disappointed that potty training isn't taking in your sleep.";
 				Baby.MessTheBedWake =  "A feeling of fullness in your lower body is fading away as you wake up a bit early to your liking. You just feel like rolling over and going back to sleep.";
 				Newborn.MessTheBedWake =  "Your eyes blink open during the night as you feel your lower belly getting emptier while your pants feel wetter. You wanna giggle to the funny feeling and shut your eyes again.";
 
@@ -648,8 +648,8 @@ public class main extends JavaPlugin
 				panty.Tickler = "You tickled [subject-name] until they wet their panty. The puddle forming underneath them is definitely your fault!";
 				panty.Tickled = "You were tickled mercilessly by [agent-name] until you wet your panty. The puddle forming underneath you is totally their fault!";
 
-				panty.TummyRubber = "You rub [subject-name]’s tummy, knowing they are only wearing panty. Then you very quickly realize they need a change of pants as soon as possible… What a mess!";
-				panty.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your panty. You need a change of pants as soon as possible… What a mess!";
+				panty.TummyRubber = "You rub [subject-name]'s tummy, knowing they are only wearing panty. Then you very quickly realize they need a change of pants as soon as possibleï¿½ What a mess!";
+				panty.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your panty. You need a change of pants as soon as possibleï¿½ What a mess!";
 
 				panty.MessMsgFirst = "your panty are messy so much for staying clean";
 				panty.MessMsgMessy = "your panty are now very messy go change";
@@ -695,8 +695,8 @@ public class main extends JavaPlugin
 				Undies.Tickler = "You tickled [subject-name] until they wet their undies. The puddle forming underneath them is definitely your fault!";
 				Undies.Tickled = "You were tickled mercilessly by [agent-name] until you wet your undies. The puddle forming underneath you is totally their fault!";
 
-				Undies.TummyRubber = "You rub [subject-name]’s tummy, knowing they are only wearing undies. Then you very quickly realize they need a change of pants as soon as possible… What a mess!";
-				Undies.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your undies. You need a change of pants as soon as possible… What a mess!";
+				Undies.TummyRubber = "You rub [subject-name]'s tummy, knowing they are only wearing undies. Then you very quickly realize they need a change of pants as soon as possibleï¿½ What a mess!";
+				Undies.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your undies. You need a change of pants as soon as possibleï¿½ What a mess!";
 
 				Undies.MessMsgFirst = "your undies are messy so much for staying clean";
 				Undies.MessMsgMessy = "your undies are now very messy go change";
@@ -739,10 +739,10 @@ public class main extends JavaPlugin
 				Pullup.Pee = "yellow stained pull-up";
 				Pullup.Poo = "now filled pull-up";
 
-				Pullup.Tickler = "You tickled [subject-name] until they wet their pull-up. They’ll be getting a rain cloud sticker this time!";
-				Pullup.Tickled = "You were tickled mercilessly by [agent-name] until you wet your pull-up. You’ll be getting a rain cloud sticker this time!";
+				Pullup.Tickler = "You tickled [subject-name] until they wet their pull-up. They'll be getting a rain cloud sticker this time!";
+				Pullup.Tickled = "You were tickled mercilessly by [agent-name] until you wet your pull-up. You'll be getting a rain cloud sticker this time!";
 
-				Pullup.TummyRubber = "You rub [subject-name]’s tummy, knowing they are in a pull-up. Potty training can wait, but the smell now rising from their pants can’t!";
+				Pullup.TummyRubber = "You rub [subject-name]ï¿½s tummy, knowing they are in a pull-up. Potty training can wait, but the smell now rising from their pants canï¿½t!";
 				Pullup.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your pull-up. So much for potty training!";
 
 				Pullup.MessMsgFirst = "your pullup fills with poop";
@@ -779,17 +779,17 @@ public class main extends JavaPlugin
 				ThickDiaper.MessFull = 1800;
 				ThickDiaper.WetFull = 2200;
 
-				ThickDiaper.Changeconfirm = " You give [subject-name] a change, putting them into a thick diaper. They’re going to walk with a noticeable waddle!";
-				ThickDiaper.Changeinto = "You got changed by [agent-name], who put you into a thick diaper. You’re going to walk with a noticeable waddle!";
+				ThickDiaper.Changeconfirm = " You give [subject-name] a change, putting them into a thick diaper. Theyï¿½re going to walk with a noticeable waddle!";
+				ThickDiaper.Changeinto = "You got changed by [agent-name], who put you into a thick diaper. Youï¿½re going to walk with a noticeable waddle!";
 
 				ThickDiaper.Pee = "yellow stained thick diaper";
 				ThickDiaper.Poo = "now filled thick diaper";
 
-				ThickDiaper.Tickler = "You tickled [subject-name] until they wet their diaper. That’s what they’re wearing those for, after all!";
-				ThickDiaper.Tickled = "You were tickled mercilessly by [agent-name] until you wet your diaper. That’s what you’re wearing these for, after all!";
+				ThickDiaper.Tickler = "You tickled [subject-name] until they wet their diaper. That's what they're wearing those for, after all!";
+				ThickDiaper.Tickled = "You were tickled mercilessly by [agent-name] until you wet your diaper. That's what you're wearing these for, after all!";
 
-				ThickDiaper.TummyRubber = "You rub [subject-name]’s tummy, knowing they are wearing a thick diaper. With so much padding between their legs, you’d barely be able to tell they added a bit of a bulge to their seat, but you can certainly smell it!";
-				ThickDiaper.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your thick diaper. With so much padding between your legs, it’d be hard for someone to tell you added a bit of a bulge to your seat, but everyone can certainly smell it!";
+				ThickDiaper.TummyRubber = "You rub [subject-name]'s tummy, knowing they are wearing a thick diaper. With so much padding between their legs, youï¿½d barely be able to tell they added a bit of a bulge to their seat, but you can certainly smell it!";
+				ThickDiaper.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your thick diaper. With so much padding between your legs, itï¿½d be hard for someone to tell you added a bit of a bulge to your seat, but everyone can certainly smell it!";
 
 				ThickDiaper.MessMsgFirst = "your thick diaper now has a little poop in it  but its a big diaper";
 				ThickDiaper.MessMsgMessy = "your diaper slows you down because its getting a little full";
@@ -835,11 +835,11 @@ public class main extends JavaPlugin
 				Diaper.Pee = "yellow stained diaper";
 				Diaper.Poo = "now filled diaper";
 
-				Diaper.Tickler = "You tickled [subject-name] until they wet their diaper. It’s not like they weren’t going to do that on their own, anyway, right?";
-				Diaper.Tickled = "You were tickled mercilessly by [agent-name] until you wet your diaper. You get the feeling they expected you’d end up wetting yourself eventually, anyway!";
+				Diaper.Tickler = "You tickled [subject-name] until they wet their diaper. It's not like they weren't going to do that on their own, anyway, right?";
+				Diaper.Tickled = "You were tickled mercilessly by [agent-name] until you wet your diaper. You get the feeling they expected youï¿½d end up wetting yourself eventually, anyway!";
 
-				Diaper.TummyRubber = "You rub [subject-name]’s tummy, knowing they are wearing a diaper. They now no longer smell of just baby powder, but this is why they’re padded in the first place!";
-				Diaper.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your diaper. You now no longer smell of just baby powder, but this is why you’re padded in the first place!";
+				Diaper.TummyRubber = "You rub [subject-name]'s tummy, knowing they are wearing a diaper. They now no longer smell of just baby powder, but this is why theyï¿½re padded in the first place!";
+				Diaper.TummyRubbed = "Your tummy was rubbed by [agent-name] until you made a mess in your diaper. You now no longer smell of just baby powder, but this is why youï¿½re padded in the first place!";
 
 				Diaper.MessMsgFirst = "your body grunts and you fill your clean diaper";
 				Diaper.MessMsgMessy = "your already messy diaper gets a little messier";
@@ -1724,29 +1724,30 @@ public class main extends JavaPlugin
 			// check if the msg comes from a player if not return
 			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
 
+			if(args.length == 1) {
+					Player baby = Bukkit.getPlayer(args[0]);
+						if(!baby == null) { //if bab is on
+							UUID babUUID = baby.getUniqueId();
 
-			try
-			{
-				Player baby = Bukkit.getPlayer(args[0]);
-				UUID babUUID = baby.getUniqueId();
+							if (!BABS.containsKey(babUUID)) {sender.sendMessage("that bab has opted out"); return false;}
 
-				if (!BABS.containsKey(babUUID)) {sender.sendMessage("that bab has opted out"); return false;}
-
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				msg((Player) sender, CONFIG.RegressStages.get(BABS.get(babUUID).Stage).DiaperChecker);
-				String stats = gson.toJson(BABS.get(babUUID));
-				stats = stats.replace('"', ' ');
-				stats = stats.replace('{', ' ');
-				stats = stats.replace('}', ' ');
-				stats = stats.replace(',', ' ');
-				msg((Player) sender, stats );
-				msgSubject(baby,(Player)sender,CONFIG.RegressStages.get(BABS.get(babUUID).Stage).DiaperChecked);
+							Gson gson = new GsonBuilder().setPrettyPrinting().create();
+							msg((Player) sender, CONFIG.RegressStages.get(BABS.get(babUUID).Stage).DiaperChecker);
+							String stats = gson.toJson(BABS.get(babUUID));
+							stats = stats.replace('"', ' ');
+							stats = stats.replace('{', ' ');
+							stats = stats.replace('}', ' ');
+							stats = stats.replace(',', ' ');
+							msg((Player) sender, stats );
+							msgSubject(baby,(Player)sender,CONFIG.RegressStages.get(BABS.get(babUUID).Stage).DiaperChecked);
+						}else {
+							msg((Player) sender, "Are you sure they are here?");
+						}
+				return true;
+			}else{
+				msg((Player) sender, "You must say the bab's name! EX: /check {babname}");
+				return false;
 			}
-			catch(Exception e)
-			{
-				msg((Player) sender, " are you sure they are here?");
-			}
-
 			return true;
 		}
 	}
@@ -1760,7 +1761,7 @@ public class main extends JavaPlugin
 			if (!(sender instanceof Player)){ msg((Player) sender,"You must be a player!"); return false;}
 			Player player = (Player) sender;
 			UUID babUUID = player.getUniqueId();			
-			if (!BABS.containsKey(babUUID)) {sender.sendMessage("you have  opted out"); return false;}
+			if (!BABS.containsKey(babUUID)) {sender.sendMessage("You have opted out"); return false;}
 
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			String stats = gson.toJson(BABS.get(babUUID));
@@ -1933,28 +1934,32 @@ public class main extends JavaPlugin
 		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
 		{
 
-			if (args[0].isEmpty()) {msg((Player) sender,"correct form is /tickle target"); return false;}
+			if(args.length != 1) msg((Player) sender,"correct form is /tickle target"); return false;
 			Player baby = Bukkit.getPlayer(args[0]);
-			UUID babUUID = baby.getUniqueId();
+			//if bab is on
+			if(!baby == null){
+				UUID babUUID = baby.getUniqueId();
 
-			if (!(BABS.containsKey(babUUID))) {msg((Player) sender,"They have opted out"); return false;}
-			System.out.println("uuid :" + babUUID.toString());
-			// get stats of the bab 
-			PlayerData changedbab = BABS.get(babUUID);
+				if (!(BABS.containsKey(babUUID))) {msg((Player) sender,"They have opted out"); return false;}
+				System.out.println("uuid :" + babUUID.toString());
+				// get stats of the bab
+				PlayerData changedbab = BABS.get(babUUID);
 
-			changedbab.wet = changedbab.wet + changedbab.bladder;
-			changedbab.bladder = 0;
+				changedbab.wet = changedbab.wet + changedbab.bladder;
+				changedbab.bladder = 0;
 
-			// save stats about player in map
-			BABS.put(babUUID,changedbab);
+				// save stats about player in map
+				BABS.put(babUUID,changedbab);
 
-			msgAgent((Player) sender,baby,CONFIG.UnderGarments.get(changedbab.diaper).Tickler);
-			msgSubject(baby,(Player) sender, CONFIG.UnderGarments.get(changedbab.diaper).Tickled );
+				msgAgent((Player) sender,baby,CONFIG.UnderGarments.get(changedbab.diaper).Tickler);
+				msgSubject(baby,(Player) sender, CONFIG.UnderGarments.get(changedbab.diaper).Tickled );
 
-			dirty(baby.getPlayer());
-
-
+				dirty(baby.getPlayer());
 			return true;
+			}else{
+					msg((Player) sender, "That bab is not on!");
+					return false;
+			}
 		}
 	}
 	public class CommandPoo implements CommandExecutor 
