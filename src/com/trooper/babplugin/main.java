@@ -1584,7 +1584,6 @@ public class main extends JavaPlugin
 		@Override
 		public boolean onCommand( CommandSender sender,  Command cmd,  String commandword,  String[] args) 
 		{
-			///code for making sure the changer is in range future impliment
 			///if (event.getPlayer().canSee(Bukkit.getPlayer(words[1])))
 			///getLogger().info(event.getPlayer().getDisplayName() + "saw" + Bukkit.getPlayer(words[1]) );
 			///	double distance = p.getLocation().distance(shot.getLocation());		
@@ -1596,17 +1595,13 @@ public class main extends JavaPlugin
 			String undergarment;
 
 			// undergarments does not contain garment instead of a name
-			if (!CONFIG.UnderGarments.containsKey(args[0]))
-			{
-
-				try
-				{
-					baby = Bukkit.getPlayer(args[0]);
+			if (!CONFIG.UnderGarments.containsKey(args[0])) {
+				baby = Bukkit.getPlayer(args[0]);
+				//bab is on
+				if(!baby == null) {
 					babUUID = baby.getUniqueId();
-				}
-				catch (Exception E)
-				{
-					msg((Player) sender, "Are you sure they are exist? I dont see them" );
+				} else {
+					msg((Player) sender, "Are you sure they are on? I dont see them" );
 					return false;
 				}
 
@@ -1651,61 +1646,66 @@ public class main extends JavaPlugin
 			changedbab.messy = 0;
 
 			Player changer = (Player) sender;
-
-			ItemStack check = CustomItemStacks.get(undergarment);
-			for (int I = 0;I < 64;I++)
-			{
-				check.setAmount(I);
-				if (changer.getInventory().contains(CustomItemStacks.get(undergarment)))
+			//gets distance from changer to baby and then checks if its less than 15 blocks, else you cant
+			int changerDistance = changer.getLocation().distance(baby.getLocation());
+			if(changerDistance <= 20){
+				ItemStack check = CustomItemStacks.get(undergarment);
+				for (int I = 0;I < 64;I++)
 				{
-					int stack = changer.getInventory().first(CustomItemStacks.get(undergarment));
-					ItemStack itemstack = changer.getInventory().getItem(stack);
-					int itemsInStack = itemstack.getAmount();
-					if (itemsInStack > 1) 
+					check.setAmount(I);
+					if (changer.getInventory().contains(CustomItemStacks.get(undergarment)))
 					{
-						itemsInStack--;
-						itemstack.setAmount(itemsInStack);
-						changer.getInventory().setItem(stack,itemstack);
-						changer.updateInventory();
+						int stack = changer.getInventory().first(CustomItemStacks.get(undergarment));
+						ItemStack itemstack = changer.getInventory().getItem(stack);
+						int itemsInStack = itemstack.getAmount();
+						if (itemsInStack > 1)
+						{
+							itemsInStack--;
+							itemstack.setAmount(itemsInStack);
+							changer.getInventory().setItem(stack,itemstack);
+							changer.updateInventory();
 
-						changedbab.diaper = undergarment;
-						// save stats about player in map
-						BABS.put(babUUID,changedbab);
-						// change potion effects to fit
-						dirty(baby.getPlayer());
+							changedbab.diaper = undergarment;
+							// save stats about player in map
+							BABS.put(babUUID,changedbab);
+							// change potion effects to fit
+							dirty(baby.getPlayer());
 
-						// get the change into line
+							// get the change into line
 
-						String changeinto = CONFIG.UnderGarments.get(undergarment).Changeinto;
-						String changeconfirm = CONFIG.UnderGarments.get(undergarment).Changeconfirm;
+							String changeinto = CONFIG.UnderGarments.get(undergarment).Changeinto;
+							String changeconfirm = CONFIG.UnderGarments.get(undergarment).Changeconfirm;
 
-						msgSubject(baby,(Player) sender, changeinto );
-						msgAgent((Player) sender, baby, changeconfirm );
-						return true;
+							msgSubject(baby,(Player) sender, changeinto );
+							msgAgent((Player) sender, baby, changeconfirm );
+							return true;
+
+						}
+						else
+						{
+							changer.getInventory().removeItem(itemstack);
+
+							changedbab.diaper = undergarment;
+							// save stats about player in map
+							BABS.put(babUUID,changedbab);
+							// change potion effects to fit
+							dirty(baby.getPlayer());
+
+							// get the change into line
+
+							String changeinto = CONFIG.UnderGarments.get(undergarment).Changeinto;
+							String changeconfirm = CONFIG.UnderGarments.get(undergarment).Changeconfirm;
+
+							msgSubject(baby,(Player) sender, changeinto );
+							msgAgent((Player) sender, baby, changeconfirm );
+							return true;
+
+						}
 
 					}
-					else 
-					{
-						changer.getInventory().removeItem(itemstack);
-
-						changedbab.diaper = undergarment;
-						// save stats about player in map
-						BABS.put(babUUID,changedbab);
-						// change potion effects to fit
-						dirty(baby.getPlayer());
-
-						// get the change into line
-
-						String changeinto = CONFIG.UnderGarments.get(undergarment).Changeinto;
-						String changeconfirm = CONFIG.UnderGarments.get(undergarment).Changeconfirm;
-
-						msgSubject(baby,(Player) sender, changeinto );
-						msgAgent((Player) sender, baby, changeconfirm );
-						return true;
-
-					}
-
 				}
+			}else{
+				msg((changer) sender, "You are too far away from your baby!");
 			}
 
 			msg((Player) sender, "you dont have a " + undergarment + " in your inventory."  );
